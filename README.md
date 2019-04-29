@@ -8,9 +8,15 @@ NLP Final Project <br />
 Connor Ford and Gabe Magee
 
 ### Summary:
--
--
--
+- We are currently generating a single class of knock-knock joke: <br />
+(a) knock knock <br />
+(b) who's there? <br />
+(a) _token_ <br />
+(b) _token_ who? <br />
+(a) Response related to _token_ + 'ew'/'who' sounding word.
+- We first iterate over a list of English words searching for those that end in an 'ew'/'who' sound. 
+- Then we take the base (token) of the word minus the 'ew'/'who' sound.
+- The token 
 
 ### Results: 
 Joke #1 - 
@@ -20,8 +26,8 @@ Joke #1 -
 -
 
 ### Hours: <br />
-Connor -  <br />
-Gabe - 
+Connor - 1hr Fri, 4 hrs Sat, 2 hrs Sun <br />
+Gabe - 1hr Fri, 4 hrs Sat, 2 hrs Sun
 
 
 
