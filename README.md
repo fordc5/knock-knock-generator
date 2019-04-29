@@ -16,7 +16,7 @@ Connor Ford and Gabe Magee
 - We first iterate over a list of English words searching for those that end in an 'ew'/'who' sound. 
 - Then we take the base (token) of the word minus the 'ew'/'who' sound.
 - The token must be a word so we search for it in the english word corpus.
-- We finally generate a tri-gram based response from the word and its surrounding context in another english-language corpus.
+- We finally generate a bi-gram based response from the word and its surrounding context in another english-language corpus.
 
 ### Results: 
 Joke #1 - 
@@ -24,6 +24,7 @@ Joke #1 -
 ### Problems: 
 - We are currently generating a small sample size of jokes. We have about 15 tokens for our joke format and don't forsee adding many more to this count. We might add an additional class of knock-knock jokes to extend this a bit.
 - We also plan to generate the responses in a couple other ways. We might experiment with a sentence-after approach; or change the english-language corpus.
+- Our bi-gram chaining approach has lots of issues right now. Like it will generate a string of loosely generated words, possibly cyclic. As detailed above we are looking to implement and test some other methods.
 
 ### Hours: <br />
 Connor - 1hr Fri, 4 hrs Sat, 2 hrs Sun <br />
@@ -33,5 +34,7 @@ Gabe - 1hr Fri, 4 hrs Sat, 2 hrs Sun
 
 ## Data 
 (English words) https://github.com/dwyl/english-words <br />
-(Phonetic compositions) https://github.com/aparrish/pronouncingpy
+(Phonetic compositions) https://github.com/aparrish/pronouncingpy <br />
+(Wikipedia English Sentences)https://www.kaggle.com/mikeortman/wikipedia-sentences<br />
+
 
