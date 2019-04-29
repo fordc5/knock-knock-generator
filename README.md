@@ -1,26 +1,26 @@
 # knock-knock-generator
 
-Status Report 
-NLP Final Project 
+Status Report <br />
+NLP Final Project <br />
 “Jokes on you”
 
-Members: 
+### Members: <br />
 Connor Ford and Gabe Magee
 
-Summary: 
+### Summary:
 -
 -
 -
 
-Results: 
+### Results: 
 Joke #1 - 
 
-Problems: 
+### Problems: 
 - We are currently generating a small sample size of jokes. We have about 15 tokens for our joke format and don't forsee adding many more to this count. We might add an additional class of knock-knock jokes to extend this a bit.
 -
 
-Hours: 
-Connor - 
+### Hours: <br />
+Connor -  <br />
 Gabe - 
 
 
@@ -28,6 +28,6 @@ Gabe -
 
 
 ## Data 
-(English words) https://github.com/dwyl/english-words
+(English words) https://github.com/dwyl/english-words <br />
 (Phonetic compositions) https://github.com/aparrish/pronouncingpy
 
