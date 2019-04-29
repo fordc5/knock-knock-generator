@@ -93,10 +93,6 @@ class SentenceGenerator:
             print('new mode')
         start = time.time()
         while(endLoc != file.tell()):
-            a = pick_from_probability_distribution(self.t_dict.get(self.word_to_int.get("<START>")))
-            if a!=None:
-                print(a)
-                print(self.tuple_to_bigram(a))
             self.process_sentence(sent)
             sent = file.readline()
             i = i + 1
@@ -113,9 +109,13 @@ class SentenceGenerator:
 
 
     def tuple_to_bigram(self,t):
+        pick_from_probability_distribution()
         a = self.word_to_int[t[0]]
         b = self.word_to_int[t[1]]
         return (a,b)
+
+    def generate_next(root):
+        self.t_dict.get(root)
 
 
     def process_sentence(self,sent):
@@ -133,12 +133,12 @@ class SentenceGenerator:
             sd[b_2] = sd.get(b_2,0)+1
             self.b_dict[b_1] = sd
             for gram in trigrams:
-                key = self.word_to_int[gram[0]]
-                bigram = gram[1:]
-                bigram = tuple([self.word_to_int[bigram[0]],self.word_to_int[bigram[1]]])
+                key = (self.word_to_int[gram[0]],self.word_to_int[gram[1]])
+                v = self.word_to_int[gram[2]]
                 sd = self.t_dict.get(key,{})
-                sd[bigram] = sd.get(bigram,0)+1
+                sd[v] = sd.get(v,0)+1
                 self.t_dict[key] = sd
+
                 b_1 = self.word_to_int[gram[1]]
                 b_2 = self.word_to_int[gram[2]]
                 sd = self.b_dict.get(b_1,{})
