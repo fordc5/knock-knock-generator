@@ -34,6 +34,7 @@ Gabe - 1hr Fri, 4 hrs Sat, 2 hrs Sun
 
 ## Data 
 (English words) https://github.com/dwyl/english-words <br />
-(Phonetic compositions) https://github.com/aparrish/pronouncingpy
+(Phonetic compositions) https://github.com/aparrish/pronouncingpy <br />
+(Wikipedia English Sentences)https://www.kaggle.com/mikeortman/wikipedia-sentences<br />
 
 
