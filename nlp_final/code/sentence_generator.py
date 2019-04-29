@@ -14,15 +14,15 @@ def info(title):
     print('process id:', os.getpid())
 
 
-wikipedia_sentences = os.getcwd()+ "/data/wikisent2.txt"
+wikipedia_sentences = os.getcwd()+ "/data/wikisample.txt"
 
 def tokenize(sent):
     sent = sent.lower()
     pattern_period = re.compile(r'([\.!?]\n)$',re.I)
-    pattern_comma = re.compile(r'(,)',re.I)
+    pattern_comma = re.compile(r'([,\"\)\(:\'])',re.I)
     sent = pattern_period.sub(r" \1",sent)
-    sent = pattern_comma.sub(r" \1",sent)
-    token_list = ["<START>"] + ["<START>"] + sent.split(" ") + ["<END>"] + ["<END>"]
+    sent = pattern_comma.sub(r" \1 ",sent)
+    token_list = ["<START>"] + sent.split(" ") + ["<END>"]
     return token_list
 
 def n_gram(w_vec, n):
@@ -49,7 +49,10 @@ def randomize_file(filename):
 
 def pick_from_probability_distribution(d):
     if d==None:
+        print("hh")
         return None
+    elif len(d.keys())==1:
+        return list(d.keys())[0]
     options = list(d.keys())
     frequencies = list(d.values())
     sum = 0
@@ -57,7 +60,7 @@ def pick_from_probability_distribution(d):
     for frq in frequencies:
         sum = sum + frq
         aux.append(sum)
-    r = random.randint(0,sum)+1
+    r = random.randint(1,sum)
     for i in range(1,len(aux)):
         if (aux[i-1]<r) and (aux[i]>=r):
             return options[i]
@@ -79,6 +82,7 @@ class SentenceGenerator:
         self.b_dict = {}
         self.t_dict = {}
         self.word_to_int = {}
+        self.int_to_word = {}
         self.word_count = 0
         if(os.path.exists(os.getcwd()+ "/data/save_files/")):
             print('resume mode')
@@ -98,10 +102,6 @@ class SentenceGenerator:
             i = i + 1
             current = time.time() - start
             if (int(current)+1)%10==0 and last_check!=int(current)+1:
-                #save it
-                print(current,": ",(i - prev)/current," sentences/second")
-                print("progress: ",(i/(endLoc+1))*100,"%")
-                print("estimated minutes left: ",(((endLoc+1)-i)/(60*(i - prev)/current)))
                 last_check = int(current)+1
                 self.save_dicts(file.tell())
         print(current,": ",(i - prev)/current," sentences/second")
@@ -109,13 +109,15 @@ class SentenceGenerator:
 
 
     def tuple_to_bigram(self,t):
-        pick_from_probability_distribution()
         a = self.word_to_int[t[0]]
         b = self.word_to_int[t[1]]
         return (a,b)
 
-    def generate_next(root):
-        self.t_dict.get(root)
+    def generate_next(self,root):
+        i = self.word_to_int[root]
+        d = self.b_dict.get(i)
+        return self.int_to_word.get(pick_from_probability_distribution(d))
+
 
 
     def process_sentence(self,sent):
@@ -123,6 +125,7 @@ class SentenceGenerator:
         for word in sent_vec:
             if word not in self.word_to_int.keys():
                 self.word_to_int[word] = self.word_count
+                self.int_to_word[self.word_count] = word
                 self.word_count = self.word_count + 1
             self.u_dict[self.word_to_int[word]] = self.u_dict.get(self.word_to_int[word],0)+1
         if len(sent_vec)>2:
@@ -133,11 +136,11 @@ class SentenceGenerator:
             sd[b_2] = sd.get(b_2,0)+1
             self.b_dict[b_1] = sd
             for gram in trigrams:
-                key = (self.word_to_int[gram[0]],self.word_to_int[gram[1]])
-                v = self.word_to_int[gram[2]]
-                sd = self.t_dict.get(key,{})
-                sd[v] = sd.get(v,0)+1
-                self.t_dict[key] = sd
+                #key = (self.word_to_int[gram[0]],self.word_to_int[gram[1]])
+                #v = self.word_to_int[gram[2]]
+                #sd = self.t_dict.get(key,{})
+                #sd[v] = sd.get(v,0)+1
+                #self.t_dict[key] = sd
 
                 b_1 = self.word_to_int[gram[1]]
                 b_2 = self.word_to_int[gram[2]]
@@ -193,9 +196,17 @@ class SentenceGenerator:
         os.chdir(prev)
         return i
 
+    def generate_sentence_starting_with(self,root):
+        l= []
+        next = self.generate_next(root)
+        while(next!="<END>" and next!=None):
+            print(next)
+            l.append(next)
+            next = self.generate_next(next)
+        return l
+
 
 if __name__ == '__main__':
-    start = time.time()
-    SentenceGenerator(wikipedia_sentences)
-    current = time.time() - start
-    print(current)
+    s = SentenceGenerator(wikipedia_sentences)
+    r = list(s.u_dict.keys())
+    print(s.generate_sentence_starting_with("cashew"))
