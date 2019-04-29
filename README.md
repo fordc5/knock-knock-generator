@@ -19,7 +19,19 @@ Connor Ford and Gabe Magee
 - We finally generate a bi-gram based response from the word and its surrounding context in another english-language corpus.
 
 ### Results: 
-Joke #1 - 
+Joke #1:
+
+Knock Knock.
+
+Who's There?
+
+Cash
+
+Cash who?
+
+Cashew apple ii cd of the target for championship at 124.
+
+(As you can see, this doesn't make much sense)
 
 ### Problems: 
 - We are currently generating a small sample size of jokes. We have about 15 tokens for our joke format and don't forsee adding many more to this count. We might add an additional class of knock-knock jokes to extend this a bit.
