@@ -52,3 +52,6 @@ Gabe - 1hr Fri, 4 hrs Sat, 2 hrs Sun
 (Movie scripts) https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html
 
 
+References:
+https://www.researchgate.net/publication/229000046_Computationally_recognizing_wordplay_in_jokes
+
