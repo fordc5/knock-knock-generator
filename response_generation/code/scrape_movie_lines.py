@@ -1,6 +1,9 @@
 ##
+# @author: CF, GM
+# @date: May 2019
 #
-#
+# Mostly data cleaning generate file of dialogues with 
+# breaks in dialogue seperated by '$$'
 
 
 movie_lines = {}
