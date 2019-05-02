@@ -48,6 +48,7 @@ Gabe - 1hr Fri, 4 hrs Sat, 2 hrs Sun
 (English words) https://github.com/dwyl/english-words <br />
 (Phonetic compositions) https://github.com/aparrish/pronouncingpy <br />
 (Wikipedia English Sentences)https://www.kaggle.com/mikeortman/wikipedia-sentences<br />
-(Second/shorter list fo English words) http://attempto.ifi.uzh.ch/site/description/
+(Second/shorter list of English words) http://attempto.ifi.uzh.ch/site/description/ <br />
+(Movie scripts) https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html
 
 
