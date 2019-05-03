@@ -6,6 +6,7 @@
 # the sentence following the occurence.
 
 from collections import defaultdict
+import random
 
 sentences = [line.strip() for line in open("./response_generation/movie_scripts/dialogues.txt", "r")]
 
@@ -20,12 +21,19 @@ for dialogue in sentences:
             for word in sentence.split(" "):
                 word_dict[word].append(sentence_split[idx+1])
 
-tokens = [line.strip().split(" ")[0] for line in open("./tokenizing_scripts/tokens/init_results_2d", "r")]
+tokens = []
+for line in open("./tokenizing_scripts/tokens/init_results_cross", "r"):
+    line = line.strip()
+    if len(line) > 1 and line[0] != "/":
+        tokens.append((line.split(" ")[0], (line.split(" ")[1])))
 
 # iterate over tokens and if token appears as key
 # then pick sentence
 for token in tokens:
-    if token in word_dict:
-        response = word_dict[token][0]
-        print(token, response)
+    (word, tok) = token
+    if word in word_dict:
+        rand_index = random.randint(0, len(word_dict[word])-1)
+        response = word_dict[word][rand_index]
+        print(word + "    " + response)
+
 

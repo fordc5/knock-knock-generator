@@ -26,9 +26,8 @@ for conversation in movie_conversations:
     lines.append(dialogue)
 
 
-
 # write to file
-f = open("./response_generation/movie_scripts/dialogues.txt", "a")
+f = open("./response_generation/movie_scripts/dialogues.txt", "w")
 for line in lines:
     strg = "$$".join(line) + "\n"
     f.write(strg)
