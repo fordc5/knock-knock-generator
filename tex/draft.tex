@@ -58,10 +58,28 @@
 
 \maketitle
 
+\section*{Abstract}
+
+Joke generation is a difficult task for humans and machines alike. 
+We consider a subclass of 'knock-knock' jokes to simplify the generative approach.
+Using an algorithm as opposed to training and testing more 'intelligently' we are able to create a small number of reasonable jokes with origins from movie scripts.
+
 \section{Introduction}
 
- Joke generation. terrible career. Almost as good as Kevin Hart though.
- 
+There have been many successful approaches to joke generation \footnote{reference papers}.
+These jokes typically follow a certain structure like call-and-response, or the more vulgar yo-mama. 
+Others have trained models on large corpuses of data scraped from reddit or twitter. These have less associated structure and generally see more mixed results.
+We wanted to consider a less common joke-type in current literature: the 'knock-knock' joke. This joke type has a couple main advantages.
+(i) It is formulaic..
+For instance we annotate the following classic 'knock-knock' joke (not generated).
+A: Knock knock.
+B: Who's there?
+A: Cash. [Token]
+B: Cash who? [Token + who = search word]
+A: No thanks, I'll have the peanuts [Play on search word]
+
+(ii) There is a discrete set of 'knock-knock' joke subtypes \footnote{paper with types}.
+
 
 
 %------------------------------------------------
@@ -75,9 +93,8 @@ and then \footnote{Example footnote}.
 
 \section{Results}
 
-\begin{table}
-\caption{Example table}
-\centering
+
+\begin{center}
 \begin{tabular}{llr}
 \toprule
 \multicolumn{2}{c}{Name} \\
@@ -88,7 +105,7 @@ John & Doe & $7.5$ \\
 Richard & Miles & $2$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
 
 
 

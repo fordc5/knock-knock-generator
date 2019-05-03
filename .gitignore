@@ -130,3 +130,12 @@ data/
 
 
 .DS_Store
+
+
+#.tex generators
+.aux
+.fdb_latexmk
+.fls
+.log
+.out
+.synctex.gz
