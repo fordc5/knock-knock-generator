@@ -69,8 +69,7 @@ Using an algorithm as opposed to training and testing more 'intelligently' we ar
 There have been many successful approaches to joke generation 
 Cai and Ehrhardt \footnote{Cai, J., and Ehrhardt, N. (2013). Is This A Joke?.} tried to distinguish between a non-joke sentence and a joke one using Neural Nets. 
 Yoshida et al \footnote{Kota Yoshida and Munetaka Minoguchi and Kenichiro Wani and Akio Nakamura and Hirokatsu Kataoka. (2018). Neural Joking Machine: Humorous image captioning.} took in various image/caption pairs and tried to produce humorous captions given an image. 
-Finally, Mihalcea and Strapparva \footnote{Mihalcea, R. and Strapparava, C. (2006), Learning to Laugh (Automatically): Computational Models for Humor Recognition.} tried to apply Linguistic theories about humor to computational generation of one-liner jokes. 
-\footnote{reference papers}.
+Finally, Mihalcea and Strapparva \footnote{Mihalcea, R. and Strapparava, C. (2006). Learning to Laugh (Automatically): Computational Models for Humor Recognition.} tried to apply Linguistic theories about humor to computational generation of one-liner jokes. 
 These jokes typically follow a certain structure like call-and-response, or the more vulgar yo-mama. 
 Others have trained models on large corpuses of data scraped from reddit or twitter. These have less associated structure and generally see more mixed results.
 We wanted to consider a less common joke-type in current literature: the 'knock-knock' joke. This joke type has a couple main advantages.
@@ -85,8 +84,15 @@ We wanted to consider a less common joke-type in current literature: the 'knock-
 \end{enumerate}
 \end{center}
 
-(ii) There is a discrete set of 'knock-knock' joke subtypes \footnote{paper with types}.
-
+\noindent (ii) There is a discrete set of 'knock-knock' joke subtypes \footnote{Taylor, J. (2004). Computationally recognizing wordplay in jokes.}.
+One of which, as Taylor identifies, is word play on the \emph{token}. We pursue this specific type because it always us to take a straightfoward, algorithmic approach to generation.
+The algorithm looks like:
+\begin{center}
+    \begin{enumerate}
+    \item[(a)] Generate \emph{Token} from dictionary/corpus by identifying \emph{search words} that end in the 'who'/'ew' and extracting the root of these words.
+    \item[(b)] Use corpus to generate responses based on \emph{search word}.
+    \end{enumerate}
+\end{center}
 
 
 %------------------------------------------------
@@ -156,7 +162,12 @@ Cai, J., and Ehrhardt, N. (2013).
 Mihalcea, R. and Strapparava, C. (2006), 
 \newblock Learning to Laugh (Automatically): Computational Models for Humor Recognition.
 \newblock{\em Computational Intelligence}, 22: 126-142. doi:10.1111/j.1467-8640.2006.00278.x
- 
+
+\bibitem[Taylor, 2004]{Taylor:2004dg}
+Taylor, J. (2006), 
+\newblock Computationally recognizing wordplay in jokes
+\newblock{\em Cognitive Science}
+
 \end{thebibliography}
 
 %----------------------------------------------------------------------------------------
