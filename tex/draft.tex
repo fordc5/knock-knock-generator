@@ -70,13 +70,16 @@ There have been many successful approaches to joke generation \footnote{referenc
 These jokes typically follow a certain structure like call-and-response, or the more vulgar yo-mama. 
 Others have trained models on large corpuses of data scraped from reddit or twitter. These have less associated structure and generally see more mixed results.
 We wanted to consider a less common joke-type in current literature: the 'knock-knock' joke. This joke type has a couple main advantages.
-(i) It is formulaic..
-For instance we annotate the following classic 'knock-knock' joke (not generated).
-A: Knock knock.
-B: Who's there?
-A: Cash. [Token]
-B: Cash who? [Token + who = search word]
-A: No thanks, I'll have the peanuts [Play on search word]
+(i) It follows a rigid structure. To illustrate the format, we annotate the following classic 'knock-knock' joke (not generated).
+\begin{center}
+\begin{enumerate}
+\item[A:] Knock knock.
+\item[B:] Who's there?
+\item[A:] Cash. [\emph{Token}]
+\item[B:] Cash who? [\emph{Token + who = search word}]
+\item[A:] No thanks, I'll have the peanuts [\emph{Play on search word}]
+\end{enumerate}
+\end{center}
 
 (ii) There is a discrete set of 'knock-knock' joke subtypes \footnote{paper with types}.
 
