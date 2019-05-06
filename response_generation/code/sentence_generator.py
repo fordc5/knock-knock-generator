@@ -14,7 +14,7 @@ def info(title):
     print('process id:', os.getpid())
 
 
-wikipedia_sentences = os.getcwd()+ "/data/wikisample.txt"
+wikipedia_sentences = os.getcwd()+ "/data/wikisent2.txt.randomized"
 
 def tokenize(sent):
     sent = sent.lower()
@@ -90,9 +90,6 @@ class SentenceGenerator:
             sent = file.readline()
             i = i + 1
             current = time.time() - start
-            if (int(current)+1)%10==0 and last_check!=int(current)+1:
-                last_check = int(current)+1
-        print(current,": ",(i - prev)/current," sentences/second")
         file.close()
 
 
