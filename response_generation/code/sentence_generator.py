@@ -84,17 +84,6 @@ class SentenceGenerator:
         self.word_to_int = {}
         self.int_to_word = {}
         self.word_count = 0
-        if(os.path.exists(os.getcwd()+ "/data/save_files/")):
-            print('resume mode')
-            target = self.load_dicts()
-            self.word_count = len(self.word_to_int.keys())
-            while(target > file.tell()):
-                i = i + 1
-                file.readline()
-            sent = file.readline()
-            prev = i
-        else:
-            print('new mode')
         start = time.time()
         while(endLoc != file.tell()):
             self.process_sentence(sent)
@@ -103,7 +92,6 @@ class SentenceGenerator:
             current = time.time() - start
             if (int(current)+1)%10==0 and last_check!=int(current)+1:
                 last_check = int(current)+1
-                self.save_dicts(file.tell())
         print(current,": ",(i - prev)/current," sentences/second")
         file.close()
 
@@ -154,47 +142,6 @@ class SentenceGenerator:
             sd[b_2] = sd.get(b_2,0)+1
             self.b_dict[b_1] = sd
 
-    def save_dicts(self,line):
-        prev = os.getcwd()
-        if(not os.path.exists(os.getcwd()+ "/data/save_files/")):
-            os.mkdir(os.getcwd()+ "/data/save_files/")
-        os.chdir(os.getcwd()+ "/data/save_files/")
-        unidest = open("unigram_dict.p","wb+")
-        bidest = open("bigram_dict.p","wb+")
-        tridest = open("trigram_dict.p","wb+")
-        loc_in_file = open("loc_in_file.p","wb+")
-        word_to_int = open("word_to_int.p","wb+")
-        pickle.dump(self.u_dict , unidest, pickle.HIGHEST_PROTOCOL)
-        pickle.dump(self.b_dict , bidest, pickle.HIGHEST_PROTOCOL)
-        pickle.dump(self.t_dict , tridest, pickle.HIGHEST_PROTOCOL)
-        pickle.dump(line,loc_in_file,pickle.HIGHEST_PROTOCOL)
-        pickle.dump(self.word_to_int,word_to_int,pickle.HIGHEST_PROTOCOL)
-        unidest.close()
-        bidest.close()
-        tridest.close()
-        loc_in_file.close()
-        word_to_int.close()
-        os.chdir(prev)
-
-    def load_dicts(self):
-        prev = os.getcwd()
-        os.chdir(os.getcwd()+ "/data/save_files/")
-        unidest = open("unigram_dict.p","rb")
-        bidest = open("bigram_dict.p","rb")
-        tridest = open("trigram_dict.p","rb")
-        loc_in_file = open("loc_in_file.p","rb")
-        word_to_int = open("word_to_int.p","rb")
-        self.u_dict = pickle.load(unidest)
-        self.b_dict = pickle.load(bidest)
-        self.t_dict = pickle.load(tridest)
-        self.word_to_int = pickle(word_to_int)
-        i = pickle.load(loc_in_file)
-        unidest.close()
-        bidest.close()
-        tridest.close()
-        loc_in_file.close()
-        os.chdir(prev)
-        return i
 
     def generate_sentence_starting_with(self,root):
         l= []
