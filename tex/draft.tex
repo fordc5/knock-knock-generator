@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc} 
 \linespread{1.05} 
 \usepackage{microtype} 
-
+\usepackage{supertabular}
 \usepackage[english]{babel} 
 
 \usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} 
@@ -107,10 +107,11 @@ This only generated a list of 9 potential english words. To extend this, while s
 This outputs a list of about 68 english \emph{search words} but the quality of the tokens took a large hit.
 
 \subsection{Generating Responses}
-We decided to generate a response to a joke one of two ways
+We decided to generate a response to a joke one of two ways:
 \begin{enumerate}[label=(\roman*)]
-\item Using a bigram learned from a Wikipedia dataset.
-\item Using a sentence following approach from a movie script dataset.
+\item Using a bigram approach learned from a Wikipedia dataset. This meant stringing together similar words to artificially construct a response.
+\item Using a 'sentence following' approach from a movie script dataset. This meant finding the occurrence of a word in the movie script data set then returning the next sentence in the dialogue.
+This dataset is nice because movie scripts allow for more conversational flow then most other corpuses do. It also includes various colloquialisms making it well-suited for jokes.
 \end{enumerate}
 %------------------------------------------------
 
@@ -118,7 +119,7 @@ We decided to generate a response to a joke one of two ways
 
 
 \begin{center}
-\begin{tabular}{lp{10mm}p{30mm}}
+\begin{supertabular}{lp{10mm}p{30mm}}
 \toprule
 token & search word & response\\
 \midrule
@@ -139,7 +140,7 @@ wa & wahoo & That's my point! \\
 gl & glue & What's it to you? \\
 curf & curfew & You think he could still be in town? \\
 \bottomrule
-\end{tabular}
+\end{supertabular}
 \end{center}
 
 %------------------------------------------------
