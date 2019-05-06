@@ -3,7 +3,7 @@
 # @date: May 2019
 #
 # idea is to take tokens and find occurence in dataset of sentences. Select 
-# the sentence following the occurence.
+# the next sentence regardless of speaker following the occurence.
 
 from collections import defaultdict
 import random
@@ -16,13 +16,15 @@ sentences = [line.strip() for line in open("./response_generation/movie_scripts/
 word_dict = defaultdict(list)
 for dialogue in sentences:
     sentence_split = dialogue.split("$$")
-    for idx, sentence in enumerate(sentence_split):
-        if idx < len(sentence_split) - 1:
-            for word in sentence.split(" "):
-                word_dict[word].append(sentence_split[idx+1])
+    joined = ' '.join(sentence_split)
+    period_split = joined.split('.')
+    for idx, sentence in enumerate(period_split):
+        if idx < len(period_split) - 1:
+            for word in sentence.strip().split(" "):
+                word_dict[word].append(period_split[idx+1])
 
 tokens = []
-for line in open("./tokenizing_scripts/tokens/init_results_cross", "r"):
+for line in open("./tokenizing_scripts/tokens/init_results_2d", "r"):
     line = line.strip()
     if len(line) > 1 and line[0] != "/":
         tokens.append((line.split(" ")[0], (line.split(" ")[1])))
