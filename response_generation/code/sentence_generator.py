@@ -183,7 +183,7 @@ if __name__ == '__main__':
     tokens = os.getcwd()+ "/tokenizing_scripts/tokens/init_results_cross"
     for ext in os.listdir(os.getcwd()+ "/tokenizing_scripts/tokens/"):
         token = os.getcwd()+ "/tokenizing_scripts/tokens/"+ext
-        s.get_tokens(token)
+    s.get_tokens(tokens)
     """
     r = list(s.u_dict.keys())
     print(s.generate_sentence_starting_with("cashew"))
