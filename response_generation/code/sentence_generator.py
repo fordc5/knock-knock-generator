@@ -50,7 +50,6 @@ def randomize_file(filename):
 
 def pick_from_probability_distribution(d):
     if d==None:
-        print("00")
         return ""
     elif len(d.keys())==1:
         return list(d.keys())[0]
@@ -142,7 +141,7 @@ class SentenceGenerator:
         while True:
             d = gr[len(l)-1].get(root,{})
             if d == {}:
-                return l
+                return l + [pick_from_probability_distribution(self.bi_gram_dict.get(l[-1]))]
             else:
                 x = pick_from_probability_distribution(d)
                 l = l + [x]
