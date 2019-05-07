@@ -7,6 +7,7 @@ import random
 from multiprocessing import Process
 
 
+
 def info(title):
     print(title)
     print('module name:', __name__)
@@ -49,8 +50,7 @@ def randomize_file(filename):
 
 def pick_from_probability_distribution(d):
     if d==None:
-        print("hh")
-        return None
+        return ""
     elif len(d.keys())==1:
         return list(d.keys())[0]
     options = list(d.keys())
@@ -64,34 +64,29 @@ def pick_from_probability_distribution(d):
     for i in range(1,len(aux)):
         if (aux[i-1]<r) and (aux[i]>=r):
             return options[i]
+    return options[-1]
 
+def read_ngrams(file):
+    d = {}
+    with open(file,"r") as f:
+        for line in f:
+            ar = line.split()
+            freq = int(ar[0])
+            key = " ".join(ar[1:-1])
+            val = ar[-1]
+            if key not in d:
+                d[key] = {}
+            d[key][val] = freq
+    return d
 
 
 class SentenceGenerator:
 
     def __init__(self, file_training_loc):
-        file = open(file_training_loc,"r")
-        file.seek(0,2) #Jumps to the end
-        endLoc = file.tell()    #Give you the end location (characters from start)
-        file.seek(0)   #Jump to the beginning of the file again
-        i = 0
-        sent = file.readline()
-        last_check = 0.0
-        prev = 0
-        self.u_dict = {}
-        self.b_dict = {}
-        self.t_dict = {}
-        self.word_to_int = {}
-        self.int_to_word = {}
-        self.word_count = 0
-        start = time.time()
-        while(endLoc != file.tell()):
-            self.process_sentence(sent)
-            sent = file.readline()
-            i = i + 1
-            current = time.time() - start
-        file.close()
-
+        self.five_gram_dict = read_ngrams(file_training_loc+"w5_.txt")
+        self.four_gram_dict = read_ngrams(file_training_loc+"w4_.txt")
+        self.bi_gram_dict = read_ngrams(file_training_loc+"w2_.txt")
+        self.tri_gram_dict = read_ngrams(file_training_loc+"w3_.txt")
 
     def tuple_to_bigram(self,t):
         a = self.word_to_int[t[0]]
@@ -141,16 +136,55 @@ class SentenceGenerator:
 
 
     def generate_sentence_starting_with(self,root):
-        l= []
-        next = self.generate_next(root)
-        while(next!="<END>" and next!=None):
-            print(next)
-            l.append(next)
-            next = self.generate_next(next)
+        gr = [self.bi_gram_dict,self.tri_gram_dict,self.four_gram_dict]
+        l = [root]
+        while True:
+            d = gr[len(l)-1].get(root,{})
+            if d == {}:
+                return l + [pick_from_probability_distribution(self.bi_gram_dict.get(l[-1]))]
+            else:
+                x = pick_from_probability_distribution(d)
+                l = l + [x]
+                root = " ".join(l)
+                if len(l)>len(gr):
+                    break
+        #return l
+        for i in range(5):
+            x = self.five_gram_dict.get(" ".join(l[-5:]),{})
+            if x == {}:
+                return l
+            else:
+                c = pick_from_probability_distribution(x)
+                l = l + [c]
         return l
 
 
+    def get_tokens(self,file):
+        l = []
+        with open(file,"r") as f:
+            for line in f:
+                if len(re.findall(r"^\//",line))<1 and len(line.split(" "))>1:
+                    l.append(line.split(" ")[0])
+                    t = self.generate_sentence_starting_with(line.split(" ")[0])
+                    if len(t)>2:
+                        base = line.split(" ")[1].split("\n")[0]
+                        resp = " ".join(t)
+                        joke = "Knock knock.\nWho's there?\n"+base+".\n"+base+" who?\n"+resp
+                        print(joke)
+                        print("---------------------------")
+
+
+
+
 if __name__ == '__main__':
-    s = SentenceGenerator(wikipedia_sentences)
+    five_grams = os.getcwd()+ "/response_generation/data/ngrams/"
+    s = SentenceGenerator(five_grams)
+
+    tokens = os.getcwd()+ "/tokenizing_scripts/tokens/init_results_cross"
+    for ext in os.listdir(os.getcwd()+ "/tokenizing_scripts/tokens/"):
+        token = os.getcwd()+ "/tokenizing_scripts/tokens/"+ext
+    s.get_tokens(tokens)
+    """
     r = list(s.u_dict.keys())
     print(s.generate_sentence_starting_with("cashew"))
+    """
