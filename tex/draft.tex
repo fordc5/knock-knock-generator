@@ -95,41 +95,45 @@ The algorithm looks like:
 
 \subsection{Generating Tokens}
 
-We used a corpus of $\sim 300k$ words and found words ending in the following substrings: ["who", "ew", "ewe", "ooo", "ooh", "oo", "hue", "ue", "eau", "eww", "hu"].  We cross-referenced the \emph{tokens} with another English language dictionary. This cross-referencing only generates a list of 9 potential english words. To extend this, while sacrificing a bit of quality, we cross-referenced tokens with a pronunciation dataset based on a CMU pronunciation dictionary with words ending in ["UW0", "UW1", "UW2"]. This outputs a list of about 68 english \emph{search words} but the quality of the tokens took a hit. For example, it generates tokens such as 'sh' corresponding to 'shew'. 
+We used a corpus of $\sim 300k$ words and found words ending in the following substrings: ["who", "ew", "ewe", "ooo", "ooh", "oo", "hue", "ue", "eau", "eww", "hu"].  We cross-referenced the \emph{tokens} with another English language dictionary. This cross-referencing only generates a list of 9 potential english words. To extend this, while sacrificing a bit of quality, we cross-referenced tokens with a pronunciation dataset based on a CMU pronunciation dictionary with words ending in ["UW0", "UW1", "UW2"]. This outputs a list of about 68 english \emph{search words} but the quality of the tokens took a hit. For example, it generates \emph{tokens} such as 'sh' corresponding to \emph{search word} 'shew'. 
 
 \subsection{Generating Responses}
 We decided to generate a response to a joke one of two ways:
 \begin{enumerate}[label=(\roman*)]
-\item Using a bigram approach learned from a Wikipedia dataset. This meant stringing together similar words to artificially construct a response.
-\item Using a 'sentence following' approach from a movie script dataset. This meant finding the occurrence of a word in the movie script data set then returning the next sentence in the dialogue.
-This dataset is nice because movie scripts allow for more conversational flow then most other corpuses do. It also includes various colloquialisms making it well-suited for jokes.
+\item Using an n-gram approach learned from a Kaggle web dataset. This required stringing together phrases to artificially construct a response.
+\item Using a 'sentence following' approach from a movie script dataset. We find the occurrence of a word in the movie script data set then return the next sentence in the dialogue or the next line of dialogue. This dataset is nice because movie scripts allow for a more conversational flow then most other corpuses do. It also includes various colloquialisms making it better-suited for jokes.
 \end{enumerate}
 %------------------------------------------------
 
 \section{Results}
 
+Below are a few hand selected jokes from four categories. The tokens either come from \_cmu or \_2d (where 
+\_2d is the list of 9 words and \_cmu the list of 68 words referenced in section II.i). The responses come from either the n-gram method, the next dialogue movie script method, or the next sentence movie script method. 
 
 \begin{center}
 \begin{supertabular}{lp{10mm}p{30mm}}
 \toprule
 token & search word & response\\
 \midrule
-\multicolumn{3}{r}{\textbf{Bigrams}} \\
+\multicolumn{3}{r}{\textbf{\_cmu x n-gram}} \\
 \cmidrule(r){1-3}
-cash & cashew & cashew apple ii cd of the target for championship at 124. \\
+bl & blew & Blew out the candles. \\
+val & value & Value of its currency.\\
 \midrule
-\multicolumn{3}{r}{\textbf{Sentence Following (1)}} \\
+\multicolumn{3}{r}{\textbf{\_cmu x next dialogue}} \\
 \cmidrule(r){1-3}
-fug & fugue & Fuck that, maybe you're my hallucination. \\
-resid & residue & Putty? On both doors? \\
-mild & mildew & And is that it? \\
-rev & revue & The job's gonna cost you a hundred bucks. \\
+curf & curfew & It won't happen again. \\
+arg & argue & That's up to the judge, Gus. It's not your problem anymore. \\
 \midrule
-\multicolumn{3}{r}{\textbf{Sentence Following (2)}} \\
+\multicolumn{3}{r}{\textbf{\_2d x next dialogue}} \\
 \cmidrule(r){1-3}
-wa & wahoo & That's my point! \\
-gl & glue & What's it to you? \\
-curf & curfew & You think he could still be in town? \\
+rev & revue & That job's gonna cost you a hundred bucks. \\
+resid & residue & What does that mean? \\
+\midrule
+\multicolumn{3}{r}{\textbf{\_2d x next sentence}} \\
+\cmidrule(r){1-3}
+tab & taboo & Set forth in the Sacred Scrolls. \\
+mild & mildew & And is that it? More or less. \\
 \bottomrule
 \end{supertabular}
 \end{center}
