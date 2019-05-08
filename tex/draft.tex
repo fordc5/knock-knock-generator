@@ -64,7 +64,7 @@ Joke generation is a difficult task for humans and machines alike. It necessitat
 
 \section{Introduction}
 
-There have been many successful approaches to joke generation. \footnote{Cai, J., and Ehrhardt, N. (2013). Is This A Joke?. Yoshida K., et al. (2018). Neural Joking Machine: Humorous image captioning. Mihalcea, R. and Strapparava, C. (2006). Learning to Laugh (Automatically): Computational Models for Humor Recognition.} 
+There have a few somewhat successful approaches to joke generation. \footnote{Cai, J., and Ehrhardt, N. (2013). Is This A Joke?. Yoshida K., et al. (2018). Neural Joking Machine: Humorous image captioning. Mihalcea, R. and Strapparava, C. (2006). Learning to Laugh (Automatically): Computational Models for Humor Recognition.} 
 These jokes typically follow a certain rigid structure such as call-and-response. But others have trained more intelligent models on large corpora of data scraped from Reddit or Twitter. These have less associated structure and generally see more mixed results.
 We want to consider a less common joke-type in the current literature: the 'knock-knock' joke. Considering this joke type has a couple main advantages.
 (i) It follows a rigid structure. To illustrate the format, we annotate the following classic 'knock-knock' joke (not generated).
@@ -100,8 +100,8 @@ We used a corpus of $\sim 300k$ words and found words ending in the following su
 \subsection{Generating Responses}
 We decided to generate a response to a joke one of two ways:
 \begin{enumerate}[label=(\roman*)]
-\item Using an n-gram approach learned from a Kaggle web dataset. This required stringing together phrases to artificially construct a response.
-\item Using a 'sentence following' approach from a movie script dataset. We find the occurrence of a word in the movie script data set then return the next sentence in the dialogue or the next line of dialogue. This dataset is nice because movie scripts allow for a more conversational flow then most other corpora do. It also includes various colloquialisms making it better-suited for jokes.
+\item Using an n-gram approach learned from a Corpus of Contemporary American English web dataset. This required stringing together phrases to artificially construct a response.
+\item Using a 'sentence following' approach from a movie script dataset. We find the occurrence of a word in the movie script data set then return the next sentence in the dialogue or the next line of dialogue.
 \end{enumerate}
 %------------------------------------------------
 
@@ -144,11 +144,11 @@ mild & mildew & And is that it? More or less. \\
 
 \subsection{Why Human Evaluation}
 
-We decided to use human evaluation because of the nature of the results. It is more difficult to evaluate with traditional quantitative metrics. A score generated from collective human reactions to jokes generated may be a good way to evaluate our models.
+We decided to use human evaluation because it is more difficult to evaluate our results with traditional quantitative metrics. A score generated from collective human reactions to jokes generated may be a good way to evaluate our models.
 
 \subsection{Evaluation Methods}
 
-To test our results, we surveyed just over 100 people each evaluating a random subset of 12 jokes (3 of each type). We asked them to score the humor of a joke and coherence of each joke on a scale of 1 (best) to 4 (worst). In the table below the results are listed as: humor (coherence).
+We surveyed just over 100 people each evaluating a random subset of 12 jokes (3 of each type). We asked them to score the humor of a joke and coherence of each joke on a scale of 1 (best) to 4 (worst). In the table below the results are listed as: humor (coherence).
 
 \subsection{Evaluation Results}
 
@@ -196,6 +196,10 @@ Mihalcea, R. and Strapparava, C. (2006),
 Taylor, J. (2006), 
 \newblock Computationally recognizing wordplay in jokes
 \newblock{\em Cognitive Science}
+
+\bibitem[Danescu-Niculescu-Mizil, Cristian and Lee, Lillian, 2011]{Danescu:2011}
+\newblock Proceedings of the 2nd Workshop on Cognitive Modeling and Computational Linguistics "Chameleons in imagined conversations: A new approach to understanding coordination of linguistic style in dialogs"
+  \newblock {\em Association for Computational Linguistics}76--87
 
 \end{thebibliography}
 
