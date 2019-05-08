@@ -34,11 +34,13 @@ for token in tokens:
     if word in word_dict:
         rand_index = random.randint(0, len(word_dict[word])-1)
         response = word_dict[word][rand_index]
-        print("Knock knock.")
-        print("Who's there?")
-        print(tok)
-        print(tok + ' who?')
-        print(response)
-        print(' ')
+        print()
+        print(tok, word, word_dict[word])
+        # print("Knock knock.")
+        # print("Who's there?")
+        # print(tok)
+        # print(tok + ' who?')
+        # print(response)
+        # print(' ')
 
 

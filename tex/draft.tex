@@ -60,7 +60,7 @@
 
 \section*{Abstract}
 
-Joke generation is a difficult task for humans and machines alike. It necessitates context, timing, and wordplay to elicit a laugh. We consider a subclass of 'knock-knock' jokes to simplify the generative and use a variety of straight-forward algorithms to create a small number of jokes with origins from movie scripts and the web.
+Joke generation is a difficult task for humans and machines alike. It necessitates context, timing, and wordplay to elicit a laugh. We consider a subclass of 'knock-knock' jokes to simplify the generation and use a variety of straight-forward algorithms to create a small number of jokes with origins from movie scripts and the web.
 
 \section{Introduction}
 
@@ -95,10 +95,10 @@ The algorithm looks like:
 
 \subsection{Generating Tokens}
 
-We used a corpus of $\sim 300k$ words and found words ending in the following substrings: ["who", "ew", "ewe", "ooo", "ooh", "oo", "hue", "ue", "eau", "eww", "hu"].  We cross-referenced the \emph{tokens} with another English language dictionary. This cross-referencing only generates a list of 9 potential english words. To extend this, while sacrificing a bit of quality, we cross-referenced tokens with a pronunciation dataset based on a CMU pronunciation dictionary with words ending in ["UW0", "UW1", "UW2"]. This outputs a list of about 68 english \emph{search words} but the quality of the tokens took a hit. For example, it generates \emph{tokens} such as 'sh' corresponding to \emph{search word} 'shew'. 
+We used a corpus of $\sim 300k$ words and found words ending in the following substrings: ["who", "ew", "ewe", "ooo", "ooh", "oo", "hue", "ue", "eau", "eww", "hu"].  We cross-referenced the \emph{tokens} with another English language dictionary. This cross-referencing only generates a list of 9 potential english words. To extend this, while sacrificing a bit of quality, we cross-referenced tokens with a pronunciation dataset based on a CMU pronunciation dictionary with words ending in ["UW0", "UW1", "UW2"]. This outputs a list of about 68 english \emph{search words} but the quality of the \emph{tokens} took a hit. For example, it generates \emph{tokens} such as 'sh' corresponding to \emph{search word} 'shew'. 
 
 \subsection{Generating Responses}
-We decided to generate a response to a joke one of two ways:
+We decided to generate a response to a joke in one of two ways:
 \begin{enumerate}[label=(\roman*)]
 \item Using an n-gram approach learned from a Corpus of Contemporary American English web dataset. This required stringing together phrases to artificially construct a response.
 \item Using a 'sentence following' approach from a movie script dataset. We find the occurrence of a word in the movie script data set then return the next sentence in the dialogue or the next line of dialogue.
@@ -107,11 +107,11 @@ We decided to generate a response to a joke one of two ways:
 
 \section{Results}
 
-Below are a few hand selected jokes from four categories. The tokens either come from \_cmu or \_2d (where 
+Below is a selection of jokes from four categories. The tokens either come from \_cmu or \_2d (where 
 \_2d is the list of 9 words and \_cmu the list of 68 words referenced in section II.i). The responses come from either the n-gram method, the next dialogue movie script method, or the next sentence movie script method. 
 
 \begin{center}
-\begin{supertabular}{lp{10mm}p{30mm}}
+\begin{supertabular}{lp{10mm}p{33mm}}
 \toprule
 token & search word & response\\
 \midrule
@@ -144,15 +144,13 @@ mild & mildew & And is that it? More or less. \\
 
 \subsection{Why Human Evaluation}
 
-We decided to use human evaluation because it is more difficult to evaluate our results with traditional quantitative metrics. A score generated from collective human reactions to jokes generated may be a good way to evaluate our models.
+We used human evaluation to assess the four joke types because it is more difficult to evaluate our results with traditional quantitative metrics. A score generated from collective human reactions to jokes generated may be a good way to evaluate the models.
 
 \subsection{Evaluation Methods}
 
-We surveyed just over 100 people each evaluating a random subset of 12 jokes (3 of each type). We asked them to score the humor of a joke and coherence of each joke on a scale of 1 (best) to 4 (worst). In the table below the results are listed as: humor (coherence).
+We surveyed just over 100 people, each evaluating a random subset of 12 jokes (3 of each type). We asked them to score the humor and coherence of a joke on a scale of 1 (best) to 4 (worst). In the table below, the results are listed as: humor (coherence) with respect to response mean, st. dev, and percentage of responses with highest rating.
 
 \subsection{Evaluation Results}
-
-
 
 \begin{center}
     \begin{tabular}{ p{2.0cm} | p{1.2cm}| p{1.2cm} | p{0.9cm} }
@@ -168,7 +166,7 @@ We surveyed just over 100 people each evaluating a random subset of 12 jokes (3 
     \end{tabular}
 \end{center}
     
-    
+Generally, we see that humor outperforms coherence except in the bi-gram case. Moreover, although not statistically significantly, there appears to be a slight bias towards favoring the movie script generation, perhaps because it provides a more conversational, colloquial feel to the flow.
 
 
 %----------------------------------------------------------------------------------------
